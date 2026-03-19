@@ -10,7 +10,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }: SearchBarProps) => {
     <div className="searchBar">
       <input
         type="text"
-        placeholder="Buscar producto..."
+        placeholder="Busca un producto por nombre o categoría..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />

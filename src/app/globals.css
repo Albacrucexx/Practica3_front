@@ -11,8 +11,8 @@ body {
 
 body {
   font-family: Arial, sans-serif;
-  background: #000;
-  color: #f5f5f5;
+  background: #dff7df;
+  color: #1f2937;
 }
 
 a {
@@ -39,33 +39,52 @@ input {
 
 .sectionContainer {
   background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid #d9ead9;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .mainTitle {
-  margin: 0 0 20px 0;
-  font-size: 2rem;
-  color: red;
+  margin: 0 0 24px 0;
+  font-size: 2.2rem;
+  color: #ff8c00;
+  text-align: center;
+  font-weight: bold;
 }
 
 .searchBar {
-  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .searchBar input {
   width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
+  max-width: 500px;
+  padding: 14px 18px;
+  border: 1px solid #b7d8b7;
+  border-radius: 999px;
   outline: none;
+  background: #f8fff8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.searchBar input::placeholder {
+  color: #7a8a7a;
+}
+
+.searchBar input:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.15);
+  background: #ffffff;
 }
 
 .resultsText {
   margin-bottom: 20px;
-  color: #d1d5db;
+  color: #4b5563;
+  text-align: center;
 }
 
 .productGrid {
@@ -76,14 +95,15 @@ input {
 
 .card {
   border: 1px solid #e5e7eb;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
   background: #fff;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 .cardImage {
@@ -107,8 +127,8 @@ input {
   display: inline-block;
   padding: 6px 10px;
   border-radius: 999px;
-  background: #e0e7ff;
-  color: #3730a3;
+  background: #fff3e0;
+  color: #d97706;
   font-size: 0.85rem;
 }
 
@@ -125,9 +145,15 @@ input {
   padding: 10px 14px;
   border: none;
   border-radius: 10px;
-  background: #111827;
+  background: #ff8c00;
   color: white;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.detailButton:hover,
+.backButton:hover {
+  background: #e67e00;
 }
 
 .backWrapper {
@@ -185,5 +211,13 @@ input {
 @media (max-width: 768px) {
   .detail {
     grid-template-columns: 1fr;
+  }
+
+  .mainTitle {
+    font-size: 1.8rem;
+  }
+
+  .searchBar input {
+    max-width: 100%;
   }
 }
