@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PRÁCTICA 3 - FRONT
 
-## Getting Started
+En esta práctica he creado una aplicación con Next.js y TypeScript que obtiene información de productos utilizando la API pública DummyJSON. La aplicación muestra un listado de productos con su imagen, nombre, categoría y precio. Además, incluye un buscador que permite filtrar los productos por nombre o categoría. Cuando se pulsa sobre un producto, se navega a una página de detalle dinámica donde se muestra información más completa del producto seleccionado.
 
-First, run the development server:
+## COMANDOS
+
+Los comandos necesarios son los siguientes:
+
+Comando para instalar todas las dependencias necesarias: `npm install`  
+Comando para poder arrancar el proyecto: `npm run dev`
+
+## CREACIÓN DEL PROYECTO
+
+Ir a la carpeta donde quiero crear el proyecto (por ejemplo, Escritorio): `cd Escritorio`  
+Crear el proyecto con Next.js: `npx create-next-app@latest practica3_front`  
+Elegir las diferentes opciones cuando lo pida  
+Instalar las dependencias y ejecutar el proyecto: puesto en el apartado anterior de **COMANDOS**  
+Instalar Axios para poder hacer peticiones a la API: `npm install axios`  
+Ejecutar el proyecto con `npm run dev`. Una vez ejecutado, se abrirá en `http://localhost:3000`
+
+## FUNCIONAMIENTO GENERAL
+
+Al iniciar la aplicación, se cargan todos los productos desde la API.  
+Los productos se muestran en una cuadrícula con su imagen, nombre, categoría y precio.  
+El usuario puede escribir en el buscador para filtrar los productos por nombre o categoría.  
+Al pulsar sobre un producto, se accede a una página de detalle con más información.  
+En la página de detalle hay un botón “Volver” que permite regresar a la página principal.
+
+## ESTRUCTURA DEL PROYECTO Y EXPLICACIÓN
+
+### lib/api/axios.ts
+
+En este archivo he configurado la conexión con la API utilizando Axios. Aquí se define la URL base de la API DummyJSON para poder realizar las peticiones desde el resto del proyecto.
+
+### lib/api/product.ts
+
+En este archivo he creado las funciones que se encargan de hacer las peticiones a la API. Las principales funciones son:
+
+`getProducts()`: obtiene todos los productos de la API.  
+`getProductById(id)`: obtiene la información completa de un producto concreto para mostrarla en la página de detalle.
+
+### types/product.ts
+
+Aquí defino la estructura de un producto utilizando TypeScript. Esto permite que TypeScript conozca qué propiedades tiene cada producto, como por ejemplo: id, title, description, category, price, rating, stock, brand, weight, dimensions, thumbnail e images.
+
+### types/index.ts
+
+Este archivo sirve para exportar los tipos y poder utilizarlos fácilmente en otros archivos del proyecto.
+
+### app/page.tsx
+
+Este archivo es la página principal de la aplicación. Aquí se cargan todos los productos desde la API. Los productos se muestran en una cuadrícula con su imagen, nombre, categoría y precio. También incluye un buscador para poder buscar productos por nombre o categoría. Además, se muestra un contador con el número de resultados encontrados.
+
+### app/product/[id]/page.tsx
+
+Este archivo corresponde a la página de detalle de cada producto. Cuando el usuario pulsa sobre un producto, se abre esta página con más información. Para obtener el producto seleccionado se utiliza el parámetro dinámico `id`. Después se llama a `getProductById()` para obtener los datos desde la API. También hay un botón “Volver” para regresar a la página principal.
+
+### app/components/SectionContainer.tsx
+
+Este componente actúa como un contenedor general de secciones. Se utiliza para envolver el contenido mediante `children` y mantener una estructura más ordenada.
+
+### app/components/SearchBar.tsx
+
+Este componente contiene el input de búsqueda. Permite al usuario escribir texto y actualizar el estado del buscador en la página principal.
+
+### app/components/ProductCard.tsx
+
+Este componente representa cada tarjeta de producto. Muestra la imagen, la categoría, el título, el precio y un enlace para ver los detalles del producto.
+
+### app/components/ProductGrid.tsx
+
+Este componente se encarga de recorrer la lista de productos y mostrar una tarjeta por cada uno de ellos utilizando el componente `ProductCard`.
+
+### app/components/ContainerBackHome.tsx
+
+Este componente contiene el botón “Volver”. Se utiliza en la página de detalle para volver a la página principal usando navegación con `useRouter()`.
+
+### app/layout.tsx
+
+Este archivo define la estructura general de la aplicación. Aquí se importan los estilos globales y se configura la metadata de la página, como el título y la descripción.
+
+### app/globals.css
+
+En este archivo he definido los estilos globales de la aplicación. Aquí se configuran el fondo de la página, la tipografía, el buscador, la cuadrícula de productos, las tarjetas y la página de detalle.
+
+## ESTRUCTURA DEL PROYECTO
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+src/
+├── app/
+│   ├── product/
+│   │   └── [id]/
+│   │       └── page.tsx
+│   ├── components/
+│   │   ├── ProductCard.tsx
+│   │   ├── ProductGrid.tsx
+│   │   ├── SearchBar.tsx
+│   │   ├── SectionContainer.tsx
+│   │   └── ContainerBackHome.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── lib/
+│   └── api/
+│       ├── axios.ts
+│       └── product.ts
+└── types/
+    ├── product.ts
+    └── index.ts
